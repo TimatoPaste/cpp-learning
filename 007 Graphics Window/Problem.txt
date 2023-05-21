@@ -1,0 +1,1 @@
+I put all the linking and compiler flags and included SDL.dll but still not running properly, something is wrong
