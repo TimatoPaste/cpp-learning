@@ -1,3 +1,5 @@
+//reads from file
+
 #include <string>
 #include <fstream>
 #include <iostream>

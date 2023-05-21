@@ -1,9 +1,11 @@
+//executes system command
+
 #include <iostream>
 #include <string>
 
 using namespace std;
 int main(){
-	system("cd ..");
+	system("echo hi");
 	return 0;
 
 

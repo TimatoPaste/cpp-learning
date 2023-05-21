@@ -1,3 +1,5 @@
+//gets stream buffers and manipulates
+
 //notepad++ shortcuts to know:
 //ctrl+l deletes current line
 //ctrl+alt+shift+enter makes line below current

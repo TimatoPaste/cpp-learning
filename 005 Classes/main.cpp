@@ -1,3 +1,5 @@
+//imports header with class and instantiates objects
+
 #include <iostream>//imports cout, cin, endl, etc
 #include "ye.h"//imports another file with class and method definitions, kind of like packages in java
 using namespace std;

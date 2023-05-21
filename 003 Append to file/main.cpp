@@ -1,3 +1,5 @@
+//appends to file
+
 #include <fstream>
 #include <string>
 #include <iostream>

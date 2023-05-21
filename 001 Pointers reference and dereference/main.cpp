@@ -1,3 +1,5 @@
+//tests pointers to pass by reference
+
 #include <string>
 #include <iostream>
 #include <fstream>
