@@ -1,6 +1,5 @@
 //makes a green window that closes in 3 seconds
 
-#include <string>
 #include <iostream>
 #include <SDL2/SDL.h>
 
@@ -41,6 +40,7 @@ int main(int argc,char* argv[]){
 	//declare renderer for the window
 	//SDL_CreateRenderer(SDL_Window, index, flags)
 	//index means in what order the renderers will initialize because there will sometimes be more than one. -1 means it's the first one
+	//later indexes will appear on top of the earlier ones
 	//0 means no flags
 	/*
 		flags:
@@ -51,14 +51,14 @@ int main(int argc,char* argv[]){
 	*/
 	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 	
-	//set background color to fill
+	//set color of whatever the renderer draws
 	//SDL_SetRenderDrawColor(SDL_Renderer,r,g,b,alpha)
 	SDL_SetRenderDrawColor(renderer,0,255,0,255);
 	
-	//fill background color
+	//fill background color with draw color
 	SDL_RenderClear(renderer);
 	
-	//show
+	//update the graphics of a renderer based on what changed (in this case, we changed the background color)
 	SDL_RenderPresent(renderer);
 	
 	//waits 3 seconds
