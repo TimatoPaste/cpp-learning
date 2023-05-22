@@ -1,0 +1,6 @@
+git remote add origin [url] //adds new remote
+git push --set-upstream origin [branch name] //sets default push/pull url to the origin/branch directory
+
+origin is just the home page of the directory
+
+This way, don't have to type url over and over.
