@@ -21,7 +21,7 @@ void reload(){
 }
 
 int main(int argc,char* argv[]){
-	
+	std::cout<<"WSAD or Arrow Key controls\nEsc to exit";
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("010 Control Rectangle",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,800,800,SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window,-1,0);
@@ -72,7 +72,11 @@ int main(int argc,char* argv[]){
 		}
 		if(keystates[SDL_SCANCODE_DOWN]||keystates[SDL_SCANCODE_S]){
 			rect.y += step;
-		}//checks states instead of individual presses, so will constant instead of slow and then fast
+		}
+		if(keystates[SDL_SCANCODE_ESCAPE]){
+			break;
+		}
+		//checks states instead of individual presses, so will constant instead of slow and then fast
 		
 		if(rect.x>800){
 			rect.x = 0;
