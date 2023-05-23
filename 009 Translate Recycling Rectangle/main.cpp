@@ -1,3 +1,5 @@
+//Draws a purple rectangle in a window and moves the rectangle, recycling each time it hits a boundary until it has reached the bottom 3 times
+
 #include <SDL2/SDL.h>
 #include <iostream>
 

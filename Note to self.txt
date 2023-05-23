@@ -4,3 +4,5 @@ git push --set-upstream origin [branch name] //sets default push/pull branch to 
 origin is just the home page of the directory
 
 This way, don't have to type url over and over.
+
+The run.bat files are for debugging. They have a pause after running so I can read the error codes.

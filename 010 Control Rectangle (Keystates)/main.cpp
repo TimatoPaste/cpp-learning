@@ -1,3 +1,4 @@
+//Draws a purple rectangle controllable via WSAD or arrows, recycles at boundaries, esc to exit
 #include <SDL2/SDL.h>
 #include <iostream>
 

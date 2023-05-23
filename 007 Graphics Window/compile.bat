@@ -4,6 +4,6 @@ pause
 : -I includes headers
 : -L gets libraries
 : -Wall turns on all warnings for compiler, more info
-: -l links packages
+: -l links packages (mingw32, SDL2main, SDL2)
 : -o makes executable
 : main is the name

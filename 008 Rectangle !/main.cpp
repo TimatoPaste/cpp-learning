@@ -1,3 +1,4 @@
+//Draws a rectangle in a window and closes after 3 seconds
 #include <SDL2/SDL.h>
 #include <iostream>
 
