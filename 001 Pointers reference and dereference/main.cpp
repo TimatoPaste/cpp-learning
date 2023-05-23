@@ -8,6 +8,10 @@ using namespace std;
 int main(){
 	
 	/*
+	If something takes a pointer type like funtion(int* a), can either put in a pointer, or the address
+	of a normal type like if int b = 10, we write function(&b). But if int* b = [address], we write function(b)
+	
+	
 	1. a::b is only used if b is a member of the class/namespace b; a::b
 	gets the member b of class a
 	

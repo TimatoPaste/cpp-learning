@@ -44,23 +44,63 @@ int main(int argc,char* argv[]){
 	
 	SDL_RenderPresent(renderer);
 	
-	bool running = true;
+	//for the poll events
+	SDL_Event event;
 	
-	//SDL_PollEvent(address of pointer), puts event value into the address
-	//SDL_PollEvent(event) returns 0 if there is no event, 1 if there is (0 is false, 1 is true)
-	//however, this is better for checking for individual keypresses
-	//meanwhile, keystates are better for press-and-holds because that way it doesn't take time to accelerate the rate of presses
+	//keystates are better for press-and-holds because that way it doesn't take time to accelerate the rate of presses
 	//returns array of ints, 1 if key is pressed, 0 if not
 	//SDL_GetKeyboardState(int*) returns a const Uint8* array with strings as indexes. The length of the array is put into the int* variable
-	const Uint8* keystates = SDL_GetKeyboardState(NULL);
+	const Uint8* keystates = SDL_GetKeyboardState(NULL);//pointer because this is constantly updated by SDL_PumpEvents();
 	
+	Uint32 mousestates;//not pointer because not updated with method like keystates
+	int mouseX;
+	int mouseY;
 	
-	while(running){
+	while(true){
 		
+		//SDL_PollEvent(address of pointer), puts event value into the address
+		//SDL_PollEvent(event) returns 0 if there is no event, 1 if there is (0 is false, 1 is true)
+		//however, this is better for checking for individual keypresses or events like clicks
+		while(SDL_PollEvent(&event)){
+			/*
+			switch(value)
+				case value:
+					action
+					break;
+				case value2:
+					action
+					break;
+			*/
+			switch(event.type){
+				//different types of mouse events checked for
+				//look at events table and their row labeled "type" for the specific event values
+				case SDL_MOUSEMOTION:
+					/*
+					-SDL_GetMouseState(int* x, int* y);
+					-position of cursor assigned to x and y variables
+					-method returns an array like SDL_GetKeyboardState(), can check for index 
+					values in the same way for different types of mouse actions, different indexes
+					*/
+					//needs addresses in order to change the values, can also put in pointers, but then would need to 
+					//dereference them in other references where you want the actual value (*mouseX)
+					mousestates = SDL_GetMouseState(&mouseX,&mouseY);
+					rect.x = mouseX;
+					rect.y = mouseY;
+					break;
+				case SDL_MOUSEBUTTONDOWN:
+					mousestates = SDL_GetMouseState(&mouseX,&mouseY);
+					rect.x = mouseX;
+					rect.y = mouseY;
+					break;
+				default:
+					break;
+			}
+			//if i wanted to have the rectangle move only when I press and hold the mouse, I would want to use the array returned by SDL_GetMouseState(int* x, int* y) just like for the keyboard
+		}
 		
 		int step = 5;
 		
-		//when the button specified by the index is pressed, 
+		//-when the button specified by the index is pressed, 
 		//the value at its index in keystates array will be 1 instead of 0
 		if(keystates[SDL_SCANCODE_LEFT]||keystates[SDL_SCANCODE_A]){
 			rect.x -= step;
