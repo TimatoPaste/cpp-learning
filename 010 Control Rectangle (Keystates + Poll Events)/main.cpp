@@ -83,14 +83,15 @@ int main(int argc,char* argv[]){
 					*/
 					//needs addresses in order to change the values, can also put in pointers, but then would need to 
 					//dereference them in other references where you want the actual value (*mouseX)
+					//centers the rectangle on the mouse pos
 					mousestates = SDL_GetMouseState(&mouseX,&mouseY);
-					rect.x = mouseX;
-					rect.y = mouseY;
+					rect.x = mouseX-(rect.w/2);
+					rect.y = mouseY-(rect.h/2);
 					break;
 				case SDL_MOUSEBUTTONDOWN:
 					mousestates = SDL_GetMouseState(&mouseX,&mouseY);
-					rect.x = mouseX;
-					rect.y = mouseY;
+					rect.x = mouseX-(rect.w/2);
+					rect.y = mouseY-(rect.h/2);
 					break;
 				default:
 					break;
