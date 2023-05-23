@@ -79,13 +79,13 @@ int main(int argc,char* argv[]){
 		//checks states instead of individual presses, so will constant instead of slow and then fast
 		
 		if(rect.x>800){
-			rect.x = 0;
+			rect.x = 0-rect.w;
 		}
 		else if(rect.x<0-rect.w){
 			rect.x = 800;
 		}
 		if(rect.y>800){
-			rect.y = 0;
+			rect.y = 0-rect.h;
 		}
 		else if(rect.y<0-rect.h){
 			rect.y = 800;
