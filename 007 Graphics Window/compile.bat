@@ -7,3 +7,6 @@ pause
 : -l links packages (mingw32, SDL2main, SDL2)
 : -o makes executable
 : main is the name
+
+:It's important that the *.cpp or source code file names come first so that the flags that come after can modify its compilation!! 
+:Otherwise, it won't work
