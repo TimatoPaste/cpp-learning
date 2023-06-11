@@ -1,23 +1,29 @@
 #include <string>
 
-using namespace std;
+//initialize all values after creating the object because you cannot declare without initializing if there is a constructor
+//if no constructor, can declare, then initialize attributes after
+
+/*
+can do this
 class Student{
 	public:
-		string fName;
-		string lName;
+		std::string fName;
+		std::string lName;
 		double pGrade;
-		string lGrade;
-		
-	public:
-		Student(string fNameIn,string lNameIn,double pGradeIn){
-			fName = fNameIn;
-			lName = lNameIn;
-			pGrade = pGradeIn;
-		}
-		
-		Student(string fNameIn,string lNameIn,string lGradeIn){
-			fName = fNameIn;
-			lName = lNameIn;
-			lGrade = lGradeIn;
-		}
+		std::string lGrade;
+};
+*/
+
+//or this, public by default, struct is technically just classes without 
+
+struct Student{
+	std::string fName;
+	std::string lName;
+	double pGrade;
+	
+	Student(){
+		fName = "EMPTY";
+		lName = "EMPTY";
+		pGrade = -1;
+	}
 };
