@@ -1,9 +1,8 @@
 #include <SDL2/SDL.h>
 #include <string>
-#include "Student.h"
 #include <array>
 
-struct Desk{
+struct Button{
 	
 	SDL_Renderer* renderer;
 	
@@ -20,12 +19,10 @@ struct Desk{
 	bool textDisplay;
 	std::array<int,3> textColor;
 	
-	Student student;
-	
-	SDL_Rect desk;
+	SDL_Rect button;
 	
 	//constructor for default values
-	Desk(){
+	Button(){
 		font = TTF_OpenFont("OpenSans-Regular.ttf",25);
 		drawn = false;
 		filled = false;
@@ -35,10 +32,10 @@ struct Desk{
 		fillColor = {0,0,0};
 		textColor = {0,0,0};
 		
-		desk.x = 0;
-		desk.y = 0;
-		desk.w = 100;
-		desk.h = 50;
+		button.x = 0;
+		button.y = 0;
+		button.w = 100;
+		button.h = 50;
 	}
 	
 	//renders current instant without clearing window
@@ -46,29 +43,22 @@ struct Desk{
 		//checks each attribute and performs tasks accordingly
 		if(filled){
 			SDL_SetRenderDrawColor(renderer,fillColor[0],fillColor[1],fillColor[2],255);
-			SDL_RenderFillRect(renderer,&desk);
+			SDL_RenderFillRect(renderer,&button);
 		}
 		if(drawn){
 			SDL_SetRenderDrawColor(renderer,drawColor[0],drawColor[1],drawColor[2],255);
-			SDL_RenderDrawRect(renderer,&desk);
+			SDL_RenderDrawRect(renderer,&button);
 		}
 		if(textDisplay){
 			SDL_Color color = {textColor[0],textColor[1],textColor[2]};
 			SDL_Surface* words = TTF_RenderText_Solid(font,text,color);
 			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,words);
-			SDL_RenderCopy(renderer,texture,NULL,&desk);
+			SDL_RenderCopy(renderer,texture,NULL,&button);
 		}
 	}
 	
 	bool containsCoord(int x, int y){
-		if(desk.x<x&&desk.x+desk.w>x&&desk.y<y&&desk.y+desk.h>y){
-			return true;
-		}
-		return false;
-	}
-	
-	bool containsDesk(Desk a){
-		if(containsCoord(a.desk.x,a.desk.y)||containsCoord(a.desk.x+a.desk.w,a.desk.y+a.desk.h)||containsCoord(a.desk.x+a.desk.w,a.desk.y)||containsCoord(a.desk.x,a.desk.y+a.desk.h)){
+		if(button.x<x&&button.x+button.w>x&&button.y<y&&button.y+button.h>y){
 			return true;
 		}
 		return false;

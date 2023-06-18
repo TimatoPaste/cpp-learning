@@ -15,11 +15,13 @@ int main(int argc,char* argv[]){
 	renderer = SDL_CreateRenderer(window,-1,0);
 	
 	std::vector<Desk> desks;
-	Desk current;
-	current.drawn = true;
-	current.textDisplay = true;
+	Desk first;
+	first.drawn = true;
+	first.textDisplay = true;
+	first.text = "hi";//later replace with student names and grades
+	first.renderer = renderer;
 	
-	desks.push_back(current);
+	desks.push_back(first);
 	
 	const Uint8* keystates = SDL_GetKeyboardState(NULL);
 	int mouseX;
@@ -30,18 +32,21 @@ int main(int argc,char* argv[]){
 		
 		SDL_Event event;
 		while(SDL_PollEvent(&event)){
-			
-			switch(event.type){
-				case SDL_MOUSEBUTTONDOWN:
+			//creates new desk each click, replacing the current desk at the back of the vector
+			if(event.type == SDL_MOUSEBUTTONDOWN){
+				if(event.button.button == SDL_BUTTON_LEFT){
 					Desk newDesk;
-					newDesk.drawn = true;
-					newDesk.textDisplay = true;
-					desks.push_back(newDesk);
-					break;
+						newDesk.drawn = true;
+						newDesk.textDisplay = true;
+						newDesk.text = "hi";
+						newDesk.renderer = renderer;
+						desks.push_back(newDesk);
+				}
+				else if(event.button.button == SDL_BUTTON_RIGHT){
+					std::cout<<"right click";
+				}
 			}
 		}
-		
-		
 		
 		if(keystates[SDL_SCANCODE_ESCAPE]){
 			break;
@@ -50,33 +55,38 @@ int main(int argc,char* argv[]){
 		if(keystates[SDL_SCANCODE_S]){
 			std::cout<<"starting sorting now!";
 		}
+		
+		//updates keystates array
 		SDL_PumpEvents();
 		
 		//clear frame + draw new
 		SDL_SetRenderDrawColor(renderer,255,255,255,255);
 		SDL_RenderClear(renderer);
 		
-		SDL_SetRenderDrawColor(renderer,0,0,0,255);
-		desks[desks.size()-1].desk.x = mouseX;
-		desks[desks.size()-1].desk.y = mouseY;
+		//current desk follows mouse, centered
+		desks[desks.size()-1].desk.x = mouseX-desks[desks.size()-1].desk.w/2;
+		desks[desks.size()-1].desk.y = mouseY-desks[desks.size()-1].desk.h/2;
+		
+		//renders desks
 		for(int a = 0;a<desks.size();a++){
-			if(desks[a].drawn){
-				SDL_SetRenderDrawColor(renderer,desks[a].drawColor[0],desks[a].drawColor[1],desks[a].drawColor[2],255);
-				SDL_RenderDrawRect(renderer,&desks[a].desk);
-			}
-			if(desks[a].filled){
-				SDL_SetRenderDrawColor(renderer,desks[a].fillColor[0],desks[a].fillColor[1],desks[a].fillColor[2],255);
-				SDL_RenderFillRect(renderer,&desks[a].desk);
-			}
-			if(desks[a].textDisplay){
-				SDL_Color color = {desks[a].textColor[0],desks[a].textColor[1],desks[a].textColor[2]};
-				SDL_Surface* words = TTF_RenderText_Solid(desks[a].font,"hi",color);//placeholder
-				SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,words);
-				SDL_RenderCopy(renderer,texture,NULL,&desks[a].desk);
-			}
+			desks[a].stamp();
 		}
 		
 		SDL_RenderPresent(renderer);
 	}
 	return 0;
 }
+
+
+/*
+Note to self:
+
+-when implementing the sort and display, make sure not to include the desk that is following the cursor.
+
+To do:
+
+-implement way to group tables while placing them, maybe one key will cycle through existing groups while another key creates a new group or deletes one
+
+
+
+*/
