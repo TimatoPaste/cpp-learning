@@ -29,6 +29,7 @@ struct Desk{
 		font = TTF_OpenFont("OpenSans-Regular.ttf",25);
 		drawn = false;
 		filled = false;
+		text = "";
 		textDisplay = false;
 		
 		drawColor = {0,0,0};
@@ -68,9 +69,20 @@ struct Desk{
 	}
 	
 	bool containsDesk(Desk a){
+		//checks four corners
 		if(containsCoord(a.desk.x,a.desk.y)||containsCoord(a.desk.x+a.desk.w,a.desk.y+a.desk.h)||containsCoord(a.desk.x+a.desk.w,a.desk.y)||containsCoord(a.desk.x,a.desk.y+a.desk.h)){
 			return true;
 		}
+		//checks four midpoints b/w corners on edges
+		else if(containsCoord(a.desk.x+a.desk.w/2,a.desk.y)||containsCoord(a.desk.x+a.desk.w/2,a.desk.y+a.desk.h)||containsCoord(a.desk.x,a.desk.y+a.desk.h/2)||containsCoord(a.desk.x+a.desk.w,a.desk.y+a.desk.h/2)){
+			return true;
+		}
+		
+		//checks for middle of desk
+		else if(containsCoord(a.desk.x+a.desk.w/2,a.desk.y+a.desk.h/2)){
+			return true;
+		}
+		
 		return false;
 	}
 };
